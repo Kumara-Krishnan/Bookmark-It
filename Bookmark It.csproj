@@ -155,6 +155,16 @@
       <Version>6.2.8</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BookmarkItLibrary\BookmarkItLibrary.csproj">
+      <Project>{4da2aedc-6402-4408-a628-7896f50db196}</Project>
+      <Name>BookmarkItLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UWPUtilities\UWPUtilities.csproj">
+      <Project>{628fe5b2-5707-4b26-a5fa-a14cc908eed4}</Project>
+      <Name>UWPUtilities</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
