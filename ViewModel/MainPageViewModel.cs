@@ -1,5 +1,6 @@
 ﻿using Bookmark_It.ViewModel.Contract;
 using BookmarkItLibrary.Domain;
+using BookmarkItLibrary.Model.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,13 @@ namespace Bookmark_It.ViewModel
             var request = new GetUserDetailsRequest(RequestType.Network, userId: default, requestToken, setAsCurrentUser: true);
             var getUserDetailsUC = new GetUserDetails(request, new GetUserDetailsCallback(this));
             getUserDetailsUC.Execute();
+        }
+
+        public override void GetBookmarks(UserDetails user)
+        {
+            var request = new GetBookmarksRequest(RequestType.Sync, user.LastSyncedTime, user.Id);
+            var getBookmarksUC = new GetBookmarks(request, new GetBookmarksCallback(this));
+            getBookmarksUC.Execute();
         }
 
         class GetLoggedInUserDetailsCallback : IGetCurrentUserDetailsPresenterCallback
@@ -129,6 +137,36 @@ namespace Bookmark_It.ViewModel
                 {
                     Presenter.View.OnUserAuthenticationSuccess(response.Data.User);
                 });
+            }
+        }
+
+        class GetBookmarksCallback : IGetBookmarksPresenterCallback
+        {
+            private readonly MainPageViewModel Presenter;
+
+            public GetBookmarksCallback(MainPageViewModel presenter)
+            {
+                Presenter = presenter;
+            }
+
+            public void OnCanceled(IUseCaseResponse<GetBookmarksResponse> response)
+            {
+
+            }
+
+            public void OnError(UseCaseError error)
+            {
+
+            }
+
+            public void OnFailed(IUseCaseResponse<GetBookmarksResponse> response)
+            {
+
+            }
+
+            public void OnSuccess(IUseCaseResponse<GetBookmarksResponse> response)
+            {
+
             }
         }
     }
