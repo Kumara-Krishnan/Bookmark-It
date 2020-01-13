@@ -57,7 +57,9 @@ namespace Bookmark_It
 
         public void OnUserAuthenticationSuccess(UserDetails userDetails)
         {
+            AppManager.Instance.CurrentUser = userDetails;
             UserName.Text = userDetails.UserName;
+            VM.GetBookmarks(userDetails);
         }
 
         public void OnUserAuthenticationFailed()

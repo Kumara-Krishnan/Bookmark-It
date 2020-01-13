@@ -1,4 +1,5 @@
 ﻿using Bookmark_It.View.Contract;
+using BookmarkItLibrary.Model.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,5 +18,7 @@ namespace Bookmark_It.ViewModel.Contract
         public abstract void GetRequestToken();
 
         public abstract void GetUserDetails(string requestToken);
+
+        public abstract void GetBookmarks(UserDetails user);
     }
 }
