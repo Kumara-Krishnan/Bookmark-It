@@ -46,7 +46,6 @@
       <uap:Extension Category="windows.appService">
       <uap:AppService Name="SystemTrayExtensionService"/>
       </uap:Extension>
-      <desktop:Extension Category="windows.fullTrustProcess" Executable="Win32\SystemTrayComponent.exe"/>
       <uap:Extension Category="windows.protocol">
       <uap:Protocol Name="bookmarkit">
       <uap:Logo>Assets\StoreLogo.png</uap:Logo>
