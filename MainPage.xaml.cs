@@ -11,6 +11,9 @@ using UWPUtilities.Util;
 using Windows.Security.Authentication.Web;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml;
+using Windows.System;
+using Windows.Web.Http.Filters;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -37,7 +40,7 @@ namespace Bookmark_It
         private void Page_Loading(Windows.UI.Xaml.FrameworkElement sender, object args)
         {
             VM.View = this;
-            VM.GetLoggedInUserDetails();
+            //VM.GetLoggedInUserDetails();
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -47,7 +50,8 @@ namespace Bookmark_It
 
         public async Task AuthenticateUser(string requestToken)
         {
-            var requestUri = LibUtil.GetSignInUrl(requestToken);
+            await WebAuthenticationBroker.AuthenticateAsync(WebAuthenticationOptions.SilentMode, new Uri("https://getpocket.com/lo"), WebAuthenticationBroker.GetCurrentApplicationCallbackUri());
+            var requestUri = LibUtil.GetSignInUrl(requestToken, isWebAuthenticationBroker: true);
             var result = await WebAuthenticationBroker.AuthenticateAsync(WebAuthenticationOptions.None, requestUri);
             if (result.ResponseStatus == WebAuthenticationStatus.Success)
             {
@@ -65,6 +69,35 @@ namespace Bookmark_It
         public void OnUserAuthenticationFailed()
         {
 
+        }
+
+        private void AuthenticationWebView_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
+        {
+            if (args.Uri.AbsoluteUri.ToString() == "https://twitter.com/login")
+            {
+                var httpBaseProtocolFilter = new HttpBaseProtocolFilter();
+                var cookies = httpBaseProtocolFilter.CookieManager.GetCookies(new Uri("https://twitter.com"));
+                foreach (var cookie in cookies)
+                {
+                    System.Diagnostics.Debug.WriteLine($"{cookie.Name}: {cookie.Value}");
+                }
+            }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            AuthenticationWebView.WebResourceRequested += OnWebResourceRequested;
+            AuthenticationWebView.Navigate(new Uri("https://twitter.com/login"));
+        }
+
+        private void OnWebResourceRequested(WebView sender, WebViewWebResourceRequestedEventArgs args)
+        {
+            System.Diagnostics.Debug.WriteLine(args.Request.RequestUri.ToString());
+        }
+
+        private void AuthenticationWebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
+        {
+            System.Diagnostics.Debug.WriteLine(args.Uri.ToString());
         }
     }
 }

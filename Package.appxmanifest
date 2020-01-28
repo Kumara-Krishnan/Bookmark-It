@@ -40,13 +40,19 @@
         Description="Bookmark It"
         BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
-        <uap:SplashScreen Image="Assets\SplashScreen.png" />
+        <uap:SplashScreen Image="Assets\SplashScreen.png" xmlns:a="http://schemas.microsoft.com/appx/manifest/uap/windows10/5" a:Optional="true"/>
       </uap:VisualElements>
       <Extensions>
       <uap:Extension Category="windows.appService">
       <uap:AppService Name="SystemTrayExtensionService"/>
       </uap:Extension>
       <desktop:Extension Category="windows.fullTrustProcess" Executable="Win32\SystemTrayComponent.exe"/>
+      <uap:Extension Category="windows.protocol">
+      <uap:Protocol Name="bookmarkit">
+      <uap:Logo>Assets\StoreLogo.png</uap:Logo>
+      <uap:DisplayName>Bookmark It</uap:DisplayName>
+      </uap:Protocol>
+      </uap:Extension>
       </Extensions>
     </Application>
   </Applications>

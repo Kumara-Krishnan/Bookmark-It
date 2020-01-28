@@ -5,11 +5,67 @@
     xmlns:local="using:Bookmark_It"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:BookmarkItLibrary.Model"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    Loading="Page_Loading">
+    Loading="Page_Loading"
+    Loaded="Page_Loaded">
+    <Page.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BaseTextBlockStyle" TargetType="TextBlock">
+                <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+                <Setter Property="MaxLines" Value="1"/>
+            </Style>
+            <DataTemplate x:Key="BookmarkTemplate" x:DataType="data:BookmarkBObj" >
+                <Grid Padding="0 10" BorderBrush="#DCDCDC" BorderThickness="0 0 0 1" 
+                      HorizontalAlignment="Stretch"
+                      Background="Transparent">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="TitleBlock" Style="{StaticResource BaseTextBlockStyle}"
+                               Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                               Text="{x:Bind Title,Mode=OneWay}"
+                               FontSize="15" FontWeight="SemiBold"/>
+                    <TextBlock x:Name="DomainBlock" Style="{StaticResource BaseTextBlockStyle}"
+                               Grid.Row="1" Grid.Column="0"
+                               Text="{x:Bind Url,Mode=OneWay}"
+                               FontSize="14" FontWeight="SemiLight"/>
+                    <TextBlock x:Name="TimeToRead" Style="{StaticResource BaseTextBlockStyle}"
+                               Grid.Row="1" Grid.Column="1"
+                               Text="{x:Bind TimeToRead,Mode=OneWay}"
+                               FontSize="14" FontWeight="SemiLight"/>
+                </Grid>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Page.Resources>
 
     <Grid>
-        <TextBlock x:Name="UserName" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="UserName" 
+                   Grid.Column="0"
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center"/>
+        <ListView x:Name="BookmarksView"
+                  Grid.Column="1"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  HorizontalContentAlignment="Stretch"
+                  VerticalContentAlignment="Stretch"
+                  ItemTemplate="{StaticResource BookmarkTemplate}"
+                  ItemsSource="{x:Bind VM.Bookmarks}"/>
+        <WebView x:Name="AuthenticationWebView"
+                 Grid.Column="0" Grid.ColumnSpan="2"
+                 Visibility="Visible"
+                 NavigationStarting="AuthenticationWebView_NavigationStarting"
+                 NavigationCompleted="AuthenticationWebView_NavigationCompleted"/>
     </Grid>
 </Page>

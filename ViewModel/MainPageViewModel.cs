@@ -1,4 +1,5 @@
 ﻿using Bookmark_It.ViewModel.Contract;
+using BookmarkItLibrary.Data.Handler.Contract;
 using BookmarkItLibrary.Domain;
 using BookmarkItLibrary.Model.Entity;
 using System;
@@ -166,7 +167,14 @@ namespace Bookmark_It.ViewModel
 
             public void OnSuccess(IUseCaseResponse<GetBookmarksResponse> response)
             {
-
+                _ = Presenter.View.RunOnUIThread(() =>
+                {
+                    if (response.Type == ResponseType.Network || response.Type == ResponseType.Sync)
+                    {
+                        Presenter.Bookmarks.Clear();
+                    }
+                    response.Data.Bookmarks.ForEach(Presenter.Bookmarks.Add);
+                });
             }
         }
     }

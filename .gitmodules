@@ -1,0 +1,6 @@
+[submodule "UWPUtilities"]
+	path = UWPUtilities
+	url = https://github.com/Kumara-Krishnan/UWPUtilities.git
+[submodule "BookmarkItLibrary"]
+	path = BookmarkItLibrary
+	url = https://github.com/Kumara-Krishnan/BookmarkItLibrary.git
