@@ -86,13 +86,7 @@ namespace Bookmark_It
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            AuthenticationWebView.WebResourceRequested += OnWebResourceRequested;
             AuthenticationWebView.Navigate(new Uri("https://twitter.com/login"));
-        }
-
-        private void OnWebResourceRequested(WebView sender, WebViewWebResourceRequestedEventArgs args)
-        {
-            System.Diagnostics.Debug.WriteLine(args.Request.RequestUri.ToString());
         }
 
         private void AuthenticationWebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
