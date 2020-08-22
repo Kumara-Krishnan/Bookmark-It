@@ -1,0 +1,15 @@
+Pocket
+Browser bookmarks extension - Chrome, firefox
+Twitter
+Telegram
+Medium
+Hackernews
+Instapaper
+
+1. Clean reader view.
+2. Powerful Global search * only after introducing multiple services.
+3. Native rendering if possible.
+4. Continue where you left off.
+5. Reading goal, Gamification and monetization strategy for free users - Streaks, free reads, etc.
+
+350 = 5

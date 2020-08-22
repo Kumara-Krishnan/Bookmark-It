@@ -1,4 +1,4 @@
-﻿using BookmarkItLibrary.Model.Entity;
+﻿using BookmarkItCommonLibrary.Model.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;

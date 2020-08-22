@@ -4,16 +4,14 @@
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
   xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
-  xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10"
-  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities" 
-  IgnorableNamespaces="uap mp desktop rescap">
+  IgnorableNamespaces="uap mp">
 
   <Identity
     Name="55998KumaraKrishnan.PocketforWindows"
     Publisher="CN=1FEBCCF3-B69F-4242-A0CC-9B072A1C0551"
-    Version="1.0.0.0" />
+    Version="0.5.22.0" />
 
-  <mp:PhoneIdentity PhoneProductId="c90abf51-a500-471c-9b35-5a3f0905384a" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="a80b61b0-4337-48be-97fe-1dce4b4e2f09" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Bookmark It</DisplayName>
@@ -38,28 +36,22 @@
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
         Description="Bookmark It"
-        BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
-        <uap:SplashScreen Image="Assets\SplashScreen.png" xmlns:a="http://schemas.microsoft.com/appx/manifest/uap/windows10/5" a:Optional="true"/>
+        BackgroundColor="white">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png"/>
+        <uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="white"/>
       </uap:VisualElements>
       <Extensions>
-      <uap:Extension Category="windows.appService">
-      <uap:AppService Name="SystemTrayExtensionService"/>
-      </uap:Extension>
-      <desktop:Extension Category="windows.fullTrustProcess" Executable="Win32\SystemTrayComponent.exe"/>
-      <uap:Extension Category="windows.protocol">
-      <uap:Protocol Name="bookmarkit">
-      <uap:Logo>Assets\StoreLogo.png</uap:Logo>
-      <uap:DisplayName>Bookmark It</uap:DisplayName>
-      </uap:Protocol>
-      </uap:Extension>
+        <uap:Extension Category="windows.protocol">
+          <uap:Protocol Name="bookmarkit">
+            <uap:Logo>Assets\StoreLogo.png</uap:Logo>
+            <uap:DisplayName>Bookmark It</uap:DisplayName>
+          </uap:Protocol>
+        </uap:Extension>
       </Extensions>
     </Application>
   </Applications>
 
   <Capabilities>
     <Capability Name="internetClient" />
-    <rescap:Capability Name="runFullTrust"/>
-    <rescap:Capability Name="confirmAppClose"/>
   </Capabilities>
 </Package>

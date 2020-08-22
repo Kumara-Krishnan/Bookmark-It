@@ -1,6 +1,6 @@
 ﻿using Bookmark_It.View.Contract;
-using BookmarkItLibrary.Model;
-using BookmarkItLibrary.Model.Entity;
+using BookmarkItCommonLibrary.Model;
+using BookmarkItCommonLibrary.Model.Entity;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,6 +13,7 @@ namespace Bookmark_It.ViewModel.Contract
 {
     internal abstract class MainPageViewModelBase : ViewModelBase<IMainPageView>
     {
+
         public readonly ObservableCollection<BookmarkBObj> Bookmarks = new ObservableCollection<BookmarkBObj>();
 
         public MainPageViewModelBase() : base() { }
@@ -23,6 +24,8 @@ namespace Bookmark_It.ViewModel.Contract
 
         public abstract void GetUserDetails(string requestToken);
 
-        public abstract void GetBookmarks(UserDetails user);
+        public abstract void SyncBookmarks(string userId);
+
+        public abstract void AddBookmarks(string userId);
     }
 }
