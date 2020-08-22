@@ -1,4 +1,4 @@
-﻿using BookmarkItLibrary.Model.Entity;
+﻿using BookmarkItCommonLibrary.Model.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +11,10 @@ namespace Bookmark_It.View.Contract
     internal interface IMainPageView : IView
     {
         Task AuthenticateUser(string requestToken);
-
         void OnUserAuthenticationSuccess(UserDetails userDetails);
 
         void OnUserAuthenticationFailed();
+
+        void UpdateUserSyncStatus(UserDetails userDetails);
     }
 }

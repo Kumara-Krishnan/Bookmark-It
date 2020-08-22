@@ -6,31 +6,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Utilities.Util;
 
 namespace Bookmark_It.DI
 {
-    public sealed class DIServiceProvider
+    public sealed class DIServiceProvider : DIServiceProviderBase
     {
         public static DIServiceProvider Instance { get { return DIServiceProviderSingleton.Instance; } }
 
-        private readonly IServiceProvider ServiceProvider;
+        private DIServiceProvider() { }
 
-        private DIServiceProvider()
+        protected override void AddServices(ServiceCollection serviceCollection)
         {
-            var serviceCollection = new ServiceCollection();
             serviceCollection.AddTransient<MainPageViewModelBase, MainPageViewModel>();
-
-            ServiceProvider = serviceCollection.BuildServiceProvider();
-        }
-
-        public object GetService(Type serviceType)
-        {
-            return ServiceProvider.GetService(serviceType);
-        }
-
-        public T GetService<T>()
-        {
-            return ServiceProvider.GetService<T>();
         }
 
         private class DIServiceProviderSingleton
